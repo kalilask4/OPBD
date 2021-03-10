@@ -18,3 +18,10 @@ select * from stud where faculty='ФПМ' and form='очная' and (year = '1' or year 
 --6. Найти всех студентов учащихся на ФПК заочном со средним балом успеваемости больше 6, отсортировать результаты по оценки в убывающем порядке
 
 Select * from stud where faculty='ФПК' AND form = 'заочная' and exm>(select avg(exm) from stud)
+
+--7. Вывести список всех преподавателей, которые работают на ФПК (не зависимо от формы обучения) отсортировать по алфавиту фамилии в пределах каждой формы обучения
+select last_name,form from teach where faculty='ФПК' group by form,last_name order by form, last_name
+
+--8. Вывести список всех преподавателей, которые работают на ФПМ, первом курсе и читают дисциплины более 100 часов.
+Select * from teach where faculty='ФПМ' and year=1 and hours>100
+
