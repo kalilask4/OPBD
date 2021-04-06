@@ -41,3 +41,25 @@ select top 1 last_name,exm from stud
 where YEAR(stud.in_date) = 2015
 ORDER BY exm desc
 
+--7) Определить количество студентов на каждом факультете
+CREATE NONCLUSTERED
+INDEX faculti_name
+ON faculty(faculty_name DESC)
+ 
+select faculty.faculty_name, count(stud.id) as count_stud  from stud 
+join process on process.stud_id = stud.id 
+join hours on process.hours_id = hours.id
+join faculty on faculty.id = hours.faculty_id
+GROUP BY faculty.faculty_name
+
+--8)Определить количество студентов иностранцев на каждом факультете
+CREATE NONCLUSTERED
+INDEX faculti_name
+ON faculty(faculty_name DESC)
+ 
+select faculty.faculty_name, count(stud.id) as count_stud  from stud 
+join process on process.stud_id = stud.id 
+join hours on process.hours_id = hours.id
+join faculty on faculty.id = hours.faculty_id
+GROUP BY faculty.faculty_name
+
