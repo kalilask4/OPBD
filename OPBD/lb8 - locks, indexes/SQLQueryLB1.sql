@@ -18,7 +18,7 @@ CREATE NONCLUSTERED
 INDEX idex_Last_name
 ON stud(last_name DESC)
  
-select stud.last_name from stud
+SELECT stud.last_name from stud
 where last_name like '«%'
 
 --3) ¬ывести список студентов, средний балл которых меньше  7
@@ -29,15 +29,15 @@ select last_name, exm from stud
 where exm < 7
 
 --4) ¬ывести список студентов, средний балл которых меньше чем средний по институту
-select last_name, exm from stud 
+SELECT last_name, exm from stud 
 where exm < (select AVG(exm) from stud)
 
 --5) ќпределить, кто из студентов поступил в 2014 году
-select last_name,in_date from stud
+SELECT last_name,in_date from stud
 where YEAR(stud.in_date) = 2014
 
 --6)ќпределить у кого из студентов, кто поступил в 2015 году, наивысша€ оценка
-select top 1 last_name,exm from stud
+SELECT top 1 last_name,exm from stud
 where YEAR(stud.in_date) = 2015
 ORDER BY exm desc
 
@@ -46,7 +46,7 @@ CREATE NONCLUSTERED
 INDEX faculti_name
 ON faculty(faculty_name DESC)
  
-select faculty.faculty_name, count(stud.id) as count_stud  from stud 
+SELECT faculty.faculty_name, count(stud.id) as count_stud  from stud 
 join process on process.stud_id = stud.id 
 join hours on process.hours_id = hours.id
 join faculty on faculty.id = hours.faculty_id
@@ -57,7 +57,7 @@ CREATE NONCLUSTERED
 INDEX faculti_name
 ON faculty(faculty_name DESC)
  
-select faculty.faculty_name, count(stud.id) as count_stud  from stud 
+SELECT faculty.faculty_name, count(stud.id) as count_stud  from stud 
 join process on process.stud_id = stud.id 
 join hours on process.hours_id = hours.id
 join faculty on faculty.id = hours.faculty_id
